@@ -1,0 +1,8 @@
+/* 
+    선언 : @import './common/colors.css';
+    사용 : var(--color-black)
+*/
+
+:root {
+  --color-black: #222;
+}
