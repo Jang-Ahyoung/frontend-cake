@@ -6,3 +6,29 @@
 @value mainBlack: black;
 @value mainDarkNavy: #020024;
 @value mainBoxShadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+/* 
+    모듈 작업을하려면 postcss-loader및 postcss-modules-values을 웹팩 설정에 추가해야 한다.
+    {
+        test: /\.css$/,
+        use: [{
+                loader: 'style-loader'
+            },
+            {
+                loader: 'css-loader',
+                options: {
+                    modules: true,
+                    localIdentName: '[name]_[local]_[hash:base64:5]'
+                }
+            },
+            {
+                loader: 'postcss-loader',
+                options: {
+                    plugins: [postcssModulesValues]
+                }
+            }
+        ]
+    }
+
+    css 모듈과 scss 는 함께 사용할 수 있기 때문에 @value 대신 scss 변수 사용도 가능하다
+*/
