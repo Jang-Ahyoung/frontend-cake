@@ -30,7 +30,9 @@ export default function UpdateObj() {
 
   return (
     <div>
-      <form onChange={handleChange}></form>
+      <input name="id" onChange={handleChange} />
+      <input name="keyword" onChange={handleChange} />
+      <input name="text" onChange={handleChange} />
     </div>
   );
 }
