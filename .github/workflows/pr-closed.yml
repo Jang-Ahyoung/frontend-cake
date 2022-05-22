@@ -1,0 +1,37 @@
+name: PR Closed Action
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  pr_closed:
+    runs-on: k8s
+    steps:
+    - uses: actions/checkout@v2
+    - name : Make PR Message
+      run: |
+        MESSAGE="PR이 종료되었습니다."
+        MESSAGE+="\n Title : ${{ github.event.pull_request.title }}"
+        MESSAGE+="\n User : ${{ github.event.pull_request.user.login }}"
+        MESSAGE+="\n URL : ${{ github.event.pull_request.url}}"
+    - name : Send PR Message
+      run: |
+        curl --request POST \
+        --url ${{ secrets.WEBHOOK_URL }} \
+        --header 'content-type: application/json' \
+        --data '{
+          "text": "PR이 종료되었습니다.",
+          "blocks": [
+            {
+              "type": "header",
+              "text": "PR이 종료되었습니다.",
+              "style": "yellow"
+            },
+            {
+              "type": "text",
+              "text": "${{ github.event.pull_request.title }}"
+            },
+          ]
+        }'
+
